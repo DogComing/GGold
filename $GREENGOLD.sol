@@ -555,19 +555,4 @@ contract Token is Context, IERC20, Ownable{
         emit Transfer(msg.sender, address(0), _value);
         return true;
     }
-
-    function setBlacklist(address _user,bool _isBlacklist) external onlyOwner(){
-        blacklist[_user] = _isBlacklist;
-        emit SetBlacklist(_user,_isBlacklist);
-    }
-
-    // transfer balance to owner
-    function withdrawToken(address token, uint amount,address payable  toAdd) external onlyOwner(){
-        if (token == address(0x0))
-            toAdd.transfer(amount);
-        else
-            IToken(token).transfer(toAdd, amount);
-    }
-
-receive() external payable {}
 }
